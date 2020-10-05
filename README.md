@@ -1,6 +1,10 @@
 # 최준형 201740137
 ## movie_app_2020
 React JS Fundamentals Course 2020
+## 9월 25일
+>1. map() 함수 사용 및 응용
+>2. 브라우저에서 F12를 누르면 개발자 도구로 접속
+>3. import와 require()함수를 사용하여 로컬 경로의 image 사용 가능
 
 ## 9월 18일
 >1. 컴포넌트가 무엇인지 알아보고, JSX를 학습.
