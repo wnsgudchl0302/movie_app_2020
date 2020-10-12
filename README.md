@@ -1,6 +1,12 @@
 # 최준형 201740137
 ## movie_app_2020
 React JS Fundamentals Course 2020
+## 10월 7일
+>1. prop-types 설치하기
+>2. render 사용해보기
+>3. state 정의하고 count 활용해보기
+>4. add(), minus() 사용해보기
+
 ## 9월 25일
 >1. map() 함수 사용 및 응용
 >2. 브라우저에서 F12를 누르면 개발자 도구로 접속
