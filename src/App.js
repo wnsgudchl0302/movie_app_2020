@@ -11,7 +11,7 @@ class App extends React.Component{
     }));
   };
   minus = () => {
-    this.setState(current => ({
+    this.setState(current => ({ 
       count: current.count - 1,
     }));
   };
