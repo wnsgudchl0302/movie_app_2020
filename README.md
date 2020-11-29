@@ -1,6 +1,8 @@
 # 최준형 201740137
 ## movie_app_2020
 React JS Fundamentals Course 2020
+## 11월 29일
+>1. 그동안 못했던 것들 학습 및 복구
 ## 10월 7일
 >1. prop-types 설치하기
 >2. render 사용해보기
