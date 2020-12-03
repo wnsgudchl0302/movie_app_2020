@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CDN REACT</title>
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    <script type="text/babel">
+        //첫번째 예제
+        class HelloMessage extends React.Component {
+            render() {
+                return (
+                    <div>
+                        안녕 {this.props.name}
+                    </div>
+                );
+            }
+        }
+
+        ReactDOM.render(
+            <HelloMessage name="최준형" />,
+            document.getElementById('hello-example')
+        );
+
+        //두번째 예제
+        class Timer extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = { seconds: 0, seconds2: 0 };
+            }
+
+            tick() {
+                this.setState(state => ({
+                    seconds: state.seconds + 1
+                }));
+            }
+
+            tick2() {
+                this.setState(state => ({
+                    seconds2: state.seconds2 + 10
+                }));
+            }
+
+            componentDidMount() {
+                this.interval = setInterval(() => this.tick(), 1000);
+            }
+
+            // @override
+            componentDidMount() {
+                this.interval2 = setInterval(() => this.tick2(), 1000);
+            }
+
+            componentWillUnmount() {
+                clearInterval(this.interval);
+                clearInterval(this.interval2);
+            }
+
+            render() {
+                return (
+                    <div>
+                        <h1>Seconds2: {this.state.seconds2}</h1>
+                    </div>
+                );
+            }
+        }
+
+        ReactDOM.render(
+            <Timer />,
+            document.getElementById('timer-example')
+        );
+        //세번째 예제
+        class TodoApp extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = { items: [], text: '' };
+                this.handleChange = this.handleChange.bind(this);
+                this.handleSubmit = this.handleSubmit.bind(this);
+            }
+
+            render() {
+                return (
+                    <div>
+                        <h3>TODO</h3>
+                        <TodoList items={this.state.items} />
+                        <form onSubmit={this.handleSubmit}>
+                            <label htmlFor="new-todo">
+                                What needs to be done?
+          </label>
+                            <input
+                                id="new-todo"
+                                onChange={this.handleChange}
+                                value={this.state.text}
+                            />
+                            <button>
+                                Add #{this.state.items.length + 1}
+                            </button>
+                        </form>
+                    </div>
+                );
+            }
+
+            handleChange(e) {
+                this.setState({ text: e.target.value });
+            }
+
+            handleSubmit(e) {
+                e.preventDefault();
+                if (this.state.text.length === 0) {
+                    return;
+                }
+                const newItem = {
+                    text: this.state.text,
+                    id: Date.now()
+                };
+                this.setState(state => ({
+                    items: state.items.concat(newItem),
+                    text: ''
+                }));
+            }
+        }
+
+        class TodoList extends React.Component {
+            render() {
+                return (
+                    <ul>
+                        {this.props.items.map(item => (
+                            <li key={item.id}>{item.text}</li>
+                        ))}
+                    </ul>
+                );
+            }
+        }
+
+        ReactDOM.render(
+            <TodoApp />,
+            document.getElementById('todos-example')
+        );
+        //네번째 예제
+        class MarkdownEditor extends React.Component {
+            constructor(props) {
+                super(props);
+                this.md = new Remarkable();
+                this.handleChange = this.handleChange.bind(this);
+                this.state = { value: 'Hello, **world**!' };
+            }
+
+            handleChange(e) {
+                this.setState({ value: e.target.value });
+            }
+
+            getRawMarkup() {
+                return { __html: this.md.render(this.state.value) };
+            }
+
+            render() {
+                return (
+                    <div className="MarkdownEditor">
+                        <h3>Input</h3>
+                        <label htmlFor="markdown-content">
+                            Enter some markdown
+        </label>
+                        <textarea
+                            id="markdown-content"
+                            onChange={this.handleChange}
+                            defaultValue={this.state.value}
+                        />
+                        <h3>Output</h3>
+                        <div
+                            className="content"
+                            dangerouslySetInnerHTML={this.getRawMarkup()}
+                        />
+                    </div>
+                );
+            }
+        }
+
+        ReactDOM.render(
+            <MarkdownEditor />,
+            document.getElementById('markdown-example')
+        );
+    </script>
+</head>
+
+<body>
+    <div id='hello-example'></div>
+    <div id='timer-example'></div>
+    <div id='todos-example'></div>
+    <div id='markdown-example'></div>
+
+</body>
+
+</html>
